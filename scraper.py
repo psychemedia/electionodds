@@ -73,6 +73,10 @@ def oddsParser(odds):
 
 typ='constituency2015GE'
 dropper(typ)
+
+dropper('UKconst2015')
+dropper('constituency2015GE')
+dropper('data')
 	
 for const in constituencyslugs:
   odds=oddsGrabber_constituency(const,{'typ':typ,'const':const})
