@@ -2,17 +2,11 @@ from __future__ import division
 import scraperwiki
 # This is a template for a Python scraper on Morph (https://morph.io)
 # including some code snippets below that you should find helpful
-
-info = scraperwiki.sqlite.table_info(name="constituency2015GE")           
-for column in info:
-    print column.name, column.type
     
 constituencyslugs=['isle-of-wight']
 
 #nodrop - 0 if you want to drop, 1 if you don't
 nodrop=1
-
-
 
 import requests
 import datetime
