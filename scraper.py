@@ -76,7 +76,7 @@ def oddsParser(odds):
 typ='constituency2015GE'
 dropper(typ)
 
-scraperwiki.sqlite.execute("CREATE TABLE 'constituency2015GE' ( 'time' datetime , 'bookie' text, 'party' text, 'odds' real, 'oddsraw' text, 'constituency' text)")
+#scraperwiki.sqlite.execute("CREATE TABLE 'constituency2015GE' ( 'time' datetime , 'bookie' text, 'party' text, 'odds' real, 'oddsraw' text, 'constituency' text)")
 	
 for const in constituencyslugs:
   odds=oddsGrabber_constituency(const,{'typ':typ,'const':const})
