@@ -54,7 +54,8 @@ def oddsParser(odds):
   oddsdata=odds['odds']
   for party in oddsdata:
     #data in tidy format
-    data={'time':odds['time'],'constituency':odds['const']}
+    #data={'time':odds['time'],'constituency':odds['const']}
+    data={'constituency':odds['const']}
     for bookie in oddsdata[party]:
       data['party']=party
       data['bookie']=bookie
