@@ -60,7 +60,7 @@ def oddsParser(odds):
       data['bookie']=bookie
       data['oddsraw']=oddsdata[party][bookie]
       data['odds']=eval(data['oddsraw'])
-    bigodds.append(data) 
+    bigodds.append(data.copy()) 
   return bigodds
 
 
@@ -68,7 +68,7 @@ for const in constituencyslugs:
   typ='constituency2015GE'
   odds=oddsGrabber_constituency(const,{'typ':typ,'const':const})
   oddsdata=oddsParser(odds)
-  scraperwiki.sqlite.save( data=oddsdata,table_name=typ)
+  scraperwiki.sqlite.save(table_name=typ, data=oddsdata)
 
 # import lxml.html
 #
