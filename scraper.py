@@ -1,11 +1,10 @@
+from __future__ import division
 # This is a template for a Python scraper on Morph (https://morph.io)
 # including some code snippets below that you should find helpful
 
 constituencyslugs=['isle-of-wight']
 
 import scraperwiki
-
-from __future__ import division
 
 import requests
 import datetime
