@@ -1,7 +1,8 @@
 from __future__ import division
 # This is a template for a Python scraper on Morph (https://morph.io)
 # including some code snippets below that you should find helpful
-
+print('div test')
+print(1/4)
 constituencyslugs=['isle-of-wight']
 
 #nodrop - 0 if you want to drop, 1 if you don't
