@@ -5,7 +5,7 @@ import scraperwiki
 print('div test')
 print(1/4)
 
-info = scraperwiki.sqlite.table_info(name="swdata")           
+info = scraperwiki.sqlite.table_info(name="constituency2015GE")           
 for column in info:
     print column.name, column.type
     
