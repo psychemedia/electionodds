@@ -1,4 +1,5 @@
 from __future__ import division
+import scraperwiki
 # This is a template for a Python scraper on Morph (https://morph.io)
 # including some code snippets below that you should find helpful
 print('div test')
@@ -13,7 +14,7 @@ constituencyslugs=['isle-of-wight']
 #nodrop - 0 if you want to drop, 1 if you don't
 nodrop=1
 
-import scraperwiki
+
 
 import requests
 import datetime
