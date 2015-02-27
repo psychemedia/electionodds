@@ -68,19 +68,13 @@ def oddsParser(odds):
     for bookie in oddsdata[party]:
       data['party']=party
       data['bookie']=bookie
-      data['oddsraw']=oddsdata[party][bookie]
+      data['oddsraw']=str(oddsdata[party][bookie])
       data['odds']=eval(data['oddsraw'])
     bigodds.append(data.copy()) 
   return bigodds
 
 typ='constituency2015GE'
 dropper(typ)
-
-#Support auto-increment
-#http://stackoverflow.com/a/9509872
-try:
-    scraperwiki.sqlite.execute("create table "+typ+" ( id INTEGER PRIMARY KEY AUTOINCREMENT)")
-except: pass
 	
 for const in constituencyslugs:
   odds=oddsGrabber_constituency(const,{'typ':typ,'const':const})
