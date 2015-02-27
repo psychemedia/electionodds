@@ -2,8 +2,6 @@ from __future__ import division
 import scraperwiki
 # This is a template for a Python scraper on Morph (https://morph.io)
 # including some code snippets below that you should find helpful
-print('div test')
-print(1/4)
 
 info = scraperwiki.sqlite.table_info(name="constituency2015GE")           
 for column in info:
@@ -83,6 +81,8 @@ def oddsParser(odds):
 
 typ='constituency2015GE'
 dropper(typ)
+
+scraperwiki.sqlite.execute("CREATE TABLE 'constituency2015GE' ( 'time' datetime , 'bookie' text, 'party' text, 'odds' real, 'oddsraw' text, 'constituency' text)")
 	
 for const in constituencyslugs:
   odds=oddsGrabber_constituency(const,{'typ':typ,'const':const})
