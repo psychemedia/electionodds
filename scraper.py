@@ -10,6 +10,14 @@ import requests
 import datetime
 from bs4 import BeautifulSoup
 
+def dropper(table):
+    """ Helper function to drop a table """
+    if nodrop==1: return
+    print "dropping",table
+    if table!='':
+        try: scraperwiki.sqlite.execute('drop table "'+table+'"')
+        except: pass
+        
 def urlbuilder_constituency(constslug):
   return 'http://www.oddschecker.com/politics/british-politics/{0}/winning-party'.format(constslug)
 
@@ -63,9 +71,10 @@ def oddsParser(odds):
     bigodds.append(data.copy()) 
   return bigodds
 
-
+typ='constituency2015GE'
+dropper(typ)
+	
 for const in constituencyslugs:
-  typ='constituency2015GE'
   odds=oddsGrabber_constituency(const,{'typ':typ,'const':const})
   oddsdata=oddsParser(odds)
   scraperwiki.sqlite.save(table_name=typ, data=oddsdata)
