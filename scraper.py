@@ -76,14 +76,16 @@ def oddsParser(odds):
 typ='constituency2015GE'
 dropper(typ)
 
-dropper('UKconst2015')
-dropper('constituency2015GE')
-dropper('data')
+#Support auto-increment
+#http://stackoverflow.com/a/9509872
+try:
+    scraperwiki.sqlite.execute("create table "+typ+" ( id INTEGER PRIMARY KEY AUTOINCREMENT)")
+except: pass
 	
 for const in constituencyslugs:
   odds=oddsGrabber_constituency(const,{'typ':typ,'const':const})
   oddsdata=oddsParser(odds)
-  scraperwiki.sqlite.save(table_name=typ, data=oddsdata)
+  scraperwiki.sqlite.save(unique_keys=[],table_name=typ, data=oddsdata)
 
 # import lxml.html
 #
