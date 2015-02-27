@@ -67,7 +67,7 @@ def oddsParser(odds):
 for const in constituencyslugs:
   odds=oddsGrabber_constituency(const)
   oddsdata=oddsParser(odds)
-  scraperwiki.sqlite.save(unique_keys=[], data=oddsdata,table='UKconst2015')
+  scraperwiki.sqlite.save(unique_keys=[], data=oddsdata,table_name='UKconst2015')
 
 # import lxml.html
 #
