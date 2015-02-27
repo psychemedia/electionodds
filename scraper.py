@@ -3,6 +3,11 @@ from __future__ import division
 # including some code snippets below that you should find helpful
 print('div test')
 print(1/4)
+
+info = scraperwiki.sqlite.table_info(name="swdata")           
+for column in info:
+    print column.name, column.type
+    
 constituencyslugs=['isle-of-wight']
 
 #nodrop - 0 if you want to drop, 1 if you don't
