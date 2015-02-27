@@ -42,19 +42,19 @@ def oddsGrabber(soup,default):
   allbets['odds']=bets
   return allbets
 
-def oddsGrabber_constituency(constslug):
+def oddsGrabber_constituency(constslug,default):
   url=urlbuilder_constituency(constslug)
   soup=makeSoup(url)
   if soup=='':
     return {}
-  return oddsGrabber(soup,{'typ':'constituencyOdds','const':constslug})
+  return oddsGrabber(soup,default)
 
 def oddsParser(odds):
   bigodds=[]
   oddsdata=odds['odds']
   for party in oddsdata:
     #data in tidy format
-    data={'time':odds['time'],'const':odds['const']}
+    data={'time':odds['time'],'constituency':odds['const']}
     for bookie in oddsdata[party]:
       data['party']=party
       data['bookie']=bookie
@@ -65,9 +65,10 @@ def oddsParser(odds):
 
 
 for const in constituencyslugs:
-  odds=oddsGrabber_constituency(const)
+  typ='constituency2015GE'
+  odds=oddsGrabber_constituency(const,{'typ':typ,'const':constslug})
   oddsdata=oddsParser(odds)
-  scraperwiki.sqlite.save(unique_keys=[], data=oddsdata,table_name='UKconst2015')
+  scraperwiki.sqlite.save(unique_keys=[], data=oddsdata,table_name=typ)
 
 # import lxml.html
 #
