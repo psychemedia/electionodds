@@ -64,8 +64,6 @@ def oddsParser(odds):
   return bigodds
 
 
-odds=oddsGrabber_constituency(const)
-
 for const in constituencyslugs:
   odds=oddsGrabber_constituency(const)
   oddsdata=oddsParser(odds)
