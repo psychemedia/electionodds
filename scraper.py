@@ -66,8 +66,8 @@ def oddsParser(odds):
     #data in tidy format
     data={'time':odds['time'],'constituency':odds['const']}
     for bookie in oddsdata[party]:
-      data['party']=party
-      data['bookie']=bookie
+      data['party']=str(party)
+      data['bookie']=str(bookie)
       data['oddsraw']=str(oddsdata[party][bookie])
       data['odds']=eval(data['oddsraw'])
     bigodds.append(data.copy()) 
