@@ -54,8 +54,7 @@ def oddsParser(odds):
   oddsdata=odds['odds']
   for party in oddsdata:
     #data in tidy format
-    #data={'time':odds['time'],'constituency':odds['const']}
-    data={'constituency':odds['const']}
+    data={'time':odds['time'],'constituency':odds['const']}
     for bookie in oddsdata[party]:
       data['party']=party
       data['bookie']=bookie
@@ -69,7 +68,7 @@ for const in constituencyslugs:
   typ='constituency2015GE'
   odds=oddsGrabber_constituency(const,{'typ':typ,'const':const})
   oddsdata=oddsParser(odds)
-  scraperwiki.sqlite.save(unique_keys=[], data=oddsdata,table_name=typ)
+  scraperwiki.sqlite.save(unique_keys=[], data=oddsdata)
 
 # import lxml.html
 #
