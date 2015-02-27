@@ -70,7 +70,7 @@ def oddsParser(odds):
       data['bookie']=str(bookie)
       data['oddsraw']=str(oddsdata[party][bookie])
       data['odds']=eval(data['oddsraw'])
-    bigodds.append(data.copy()) 
+      bigodds.append(data.copy()) 
   return bigodds
 
 typ='constituency2015GE'
