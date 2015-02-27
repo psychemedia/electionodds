@@ -4,7 +4,8 @@ from __future__ import division
 
 constituencyslugs=['isle-of-wight']
 
-nodrop=0
+#nodrop - 0 if you want to drop, 1 if you don't
+nodrop=1
 
 import scraperwiki
 
