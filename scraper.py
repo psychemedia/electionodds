@@ -83,6 +83,43 @@ for const in constituencyslugs:
   oddsdata=oddsParser(odds)
   scraperwiki.sqlite.save(unique_keys=[],table_name=typ, data=oddsdata)
 
+
+#General election overall
+
+def urlbuilder_generic(path,slug):
+  return 'http://www.oddschecker.com/{0}/{1}'.format(path,slug)
+
+def oddsGrabber_generic(path,slug,default):
+  url=urlbuilder_generic(path, slug)
+  soup=makeSoup(url)
+  if soup=='':
+    return {}
+  return oddsGrabber(soup,default)
+
+def oddsParser_generic(odds):
+  bigodds=[]
+  oddsdata=odds['odds']
+  for outcome in oddsdata:
+    #data in tidy format
+    data={'time':odds['time'],'typ':odds['typ']}
+    for bookie in oddsdata[outcome]:
+      data['outcome']=str(outcome)
+      data['bookie']=str(bookie)
+      data['oddsraw']=str(oddsdata[outcome][bookie])
+      data['odds']=eval(str(data['oddsraw']))
+      bigodds.append(data.copy()) 
+  return bigodds
+
+typ='overall2015GE'
+dropper(typ)
+
+scraperwiki.sqlite.execute("CREATE TABLE IF NOT EXISTS 'overall2015GE' ( 'time' datetime , 'bookie' text, 'outcome' text, 'odds' real, 'oddsraw' text, 'typ' text)")
+bigslugs=[('politics/british-politics/next-uk-general-election','next-government')]	
+for path, slug in bigslugs:
+  odds=oddsGrabber_generic(path,slug,{'typ':typ})
+  oddsdata=oddsParser_generic(odds)
+  scraperwiki.sqlite.save(unique_keys=[],table_name=typ, data=oddsdata)
+  
 # import lxml.html
 #
 # # Read in a page
