@@ -70,9 +70,11 @@ def oddsParser(odds,bookies=[]):
       	data['party']=str(party)
       	data['bookie']=str(bookie)
       	data['oddsraw']=str(oddsdata[party][bookie])
-      	try:data['odds']=eval(data['oddsraw'])
-      	except: data['odds']=0.0
-      	bigodds.append(data.copy()) 
+      	try:
+      		data['odds']=eval(data['oddsraw'])
+      		bigodds.append(data.copy())
+      	except: pass
+      	 
   return bigodds
 
 typ='IW2015GE'
@@ -111,9 +113,11 @@ def oddsParser_generic(odds,bookies=[]):
       	data['outcome']=str(outcome)
       	data['bookie']=str(bookie)
       	data['oddsraw']=str(oddsdata[outcome][bookie])
-      	try: data['odds']=eval(str(data['oddsraw']))
-      	except: data['odds']=0.0
-      	bigodds.append(data.copy()) 
+      	try:
+      		data['odds']=eval(str(data['oddsraw']))
+      		bigodds.append(data.copy()) 
+      	except: pass
+      	
   return bigodds
 
 typ='overall2015GE'
