@@ -59,18 +59,19 @@ def oddsGrabber_constituency(constslug,default):
     return {}
   return oddsGrabber(soup,default)
 
-def oddsParser(odds):
+def oddsParser(odds,bookies=[]):
   bigodds=[]
   oddsdata=odds['odds']
   for party in oddsdata:
     #data in tidy format
     data={'time':odds['time'],'constituency':odds['const']}
     for bookie in oddsdata[party]:
-      data['party']=str(party)
-      data['bookie']=str(bookie)
-      data['oddsraw']=str(oddsdata[party][bookie])
-      data['odds']=eval(data['oddsraw'])
-      bigodds.append(data.copy()) 
+      if bookies==[] or bookie in bookies:
+      	data['party']=str(party)
+      	data['bookie']=str(bookie)
+      	data['oddsraw']=str(oddsdata[party][bookie])
+      	data['odds']=eval(data['oddsraw'])
+      	bigodds.append(data.copy()) 
   return bigodds
 
 typ='constituency2015GE'
@@ -133,6 +134,7 @@ constituencyslugs=["aberavon","aberconwy","aberdeen-north","aberdeen-south","abe
 	
 for const in constituencyslugs:
   sleep(0.1)
+  print(const)
   odds=oddsGrabber_constituency(const,{'typ':typ,'const':const})
   oddsdata=oddsParser(odds,['LD','B3','WH'])
   scraperwiki.sqlite.save(unique_keys=[],table_name='full', data=oddsdata)
