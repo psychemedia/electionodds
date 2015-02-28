@@ -70,7 +70,8 @@ def oddsParser(odds,bookies=[]):
       	data['party']=str(party)
       	data['bookie']=str(bookie)
       	data['oddsraw']=str(oddsdata[party][bookie])
-      	data['odds']=eval(data['oddsraw'])
+      	try:data['odds']=eval(data['oddsraw'])
+      	except: data['odds']=0.0
       	bigodds.append(data.copy()) 
   return bigodds
 
@@ -110,7 +111,8 @@ def oddsParser_generic(odds,bookies=[]):
       	data['outcome']=str(outcome)
       	data['bookie']=str(bookie)
       	data['oddsraw']=str(oddsdata[outcome][bookie])
-      	data['odds']=eval(str(data['oddsraw']))
+      	try: data['odds']=eval(str(data['oddsraw']))
+      	except: data['odds']=0.0
       	bigodds.append(data.copy()) 
   return bigodds
 
