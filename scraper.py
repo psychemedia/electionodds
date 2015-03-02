@@ -37,6 +37,7 @@ def oddsGrabber(soup,default):
   if soup=="": return {}
   #soup=makeSoup(url)
   table=soup.find( "tbody", {"id":"t1"} )
+  if table is None: return {}
   allbets=default
   allbets['time']=datetime.datetime.utcnow()
   bets={}
