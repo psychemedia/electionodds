@@ -34,13 +34,17 @@ def makeSoup(url):
 	return ret
 
 def oddsGrabber(soup,default):
-  if soup=="": return {}
-  #soup=makeSoup(url)
-  table=soup.find( "tbody", {"id":"t1"} )
-  if table is None: return {}
+
   allbets=default
   allbets['time']=datetime.datetime.utcnow()
   bets={}
+  allbets['odds']=bets
+  
+  if soup=="": return allbets
+  
+  table=soup.find( "tbody", {"id":"t1"} )
+  if table is None: return allbets
+
   for row in table.findAll('tr'):
     name=row('td')[1].string
     tds = row('td')[3:]
@@ -61,6 +65,7 @@ def oddsGrabber_constituency(constslug,default):
   return oddsGrabber(soup,default)
 
 def oddsParser(odds,bookies=[]):
+  if 'odds' not in odds: return []
   bigodds=[]
   oddsdata=odds['odds']
   for party in oddsdata:
@@ -145,7 +150,7 @@ for const in constituencyslugs:
   sleep(0.1)
   print(const)
   odds=oddsGrabber_constituency(const,{'typ':typ,'const':const})
-  oddsdata=oddsParser(odds,['LD','B3','WH'])
+  oddsdata=oddsParser(odds,['LD','B3','WH','FB'])
   scraperwiki.sqlite.save(unique_keys=[],table_name='constituency2015GE', data=oddsdata)
 
 
