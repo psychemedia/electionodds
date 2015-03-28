@@ -41,7 +41,7 @@ def oddsGrabber(tree,default):
                     bets[name][ cell.get('id').split('_')[1] ]=cell.text
                 except: pass
     allbets['odds']=bets
-    print(allbets)
+    #print(allbets)
     return allbets
     
 def makeSoup(url):
