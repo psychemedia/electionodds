@@ -11,6 +11,7 @@ nodrop=1
 import requests
 import datetime
 from bs4 import BeautifulSoup
+from lxml import html
 
 def dropper(table):
     """ Helper function to drop a table """
@@ -23,17 +24,38 @@ def dropper(table):
 def urlbuilder_constituency(constslug):
   return 'http://www.oddschecker.com/politics/british-politics/{0}/winning-party'.format(constslug)
 
+def oddsGrabber(tree,default):
+    allbets=default
+    allbets['time']=datetime.datetime.utcnow()
+    bets={}
+    allbets['odds']=bets
+  
+    if tree=="" or tree is None: return allbets
+
+    for row in tree.xpath('//tbody[@id="t1"]/tr'):
+        name=row[1].text
+        bets[name]={}
+        for cell in row[3:]:
+            if cell.text is not None:
+                try:
+                    bets[name][ cell.get('id').split('_')[1] ]=cell.text
+                except: pass
+    allbets['odds']=bets
+    print(allbets)
+    return allbets
+    
 def makeSoup(url):
 	try:
 		r = requests.get(url)
 		#print '>>>',r.history
-		ret= BeautifulSoup(r.text)
+		#ret= BeautifulSoup(r.text)
+		ret=html.fromstring(r.text)
 		for s in r.history:
 			if s.status_code==302: ret==""
 	except: ret=""
 	return ret
 
-def oddsGrabber(soup,default):
+def oddsGrabber2(soup,default):
 
   allbets=default
   allbets['time']=datetime.datetime.utcnow()
